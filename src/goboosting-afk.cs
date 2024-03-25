@@ -1,8 +1,11 @@
-﻿namespace Core;
+﻿using CounterStrikeSharp.API.Core;
+using Microsoft.Extensions.Logging;
+
+namespace Core;
 
 public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
-    public override string ModuleName => "Plugin";
+    public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
     public override string ModuleVersion => "1.0.0";
 
@@ -11,7 +14,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 
     //internal Dictionary<CCSPlayerController, Models.PlayerData> PlayerCache = new();
 
-    //internal static ILogger? _logger;
+    internal static ILogger? _logger;
 
     public void OnConfigParsed(PluginConfig _Config)
     {
