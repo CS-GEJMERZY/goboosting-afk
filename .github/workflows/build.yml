@@ -13,9 +13,9 @@ on:
         default: '1.0.0'
 
 env:
-  PROJECT_PATH: src/goboosting-AFK.csproj
-  PROJECT_NAME: goboosting-AFK
-  OUTPUT_PATH: ./goboosting-AFK
+  PROJECT_PATH: src/goboosting-afk.csproj
+  PROJECT_NAME: goboosting-afk
+  OUTPUT_PATH: ./goboosting-afk
 
 jobs:
   Build: 
@@ -25,7 +25,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Restore
         run: "dotnet restore ${{ env.PROJECT_PATH }}"
       - name: Build 
