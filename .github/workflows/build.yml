@@ -13,9 +13,9 @@ on:
         default: '1.0.0'
 
 env:
-  PROJECT_PATH: src/Plugin.csproj
-  PROJECT_NAME: Plugin
-  OUTPUT_PATH: ./Plugin
+  PROJECT_PATH: src/goboosting-AFK.csproj
+  PROJECT_NAME: goboosting-AFK
+  OUTPUT_PATH: ./goboosting-AFK
 
 jobs:
   Build: 
