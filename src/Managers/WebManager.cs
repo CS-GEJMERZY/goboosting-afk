@@ -34,7 +34,7 @@ public class WebManager
         };
         string jsonString = JsonConvert.SerializeObject(jsonData);
 
-        string query = $"https://goboosting.pl/api.php?gracze&ip={ServerIp}&api={ApiKey}&ver={ApiVersion}&{jsonString}";
+        string query = $"https://goboosting.pl/api.php?gracze&ip={ServerIp}&api={ApiKey}&ver={ApiVersion}&json={jsonString}";
         using HttpClient httpClient = new();
 
         try
