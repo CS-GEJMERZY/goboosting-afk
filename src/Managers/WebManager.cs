@@ -7,7 +7,6 @@ namespace Core.Managers;
 
 public class SklepcsWebManager
 {
-
     private string ApiKey { get; set; } = "1234567890";
 
     private int ApiVersion { get; set; } = 200;
@@ -42,6 +41,11 @@ public class SklepcsWebManager
             if (response.IsSuccessStatusCode)
             {
                 string responseContent = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrEmpty(responseContent))
+                {
+                    return null;
+                }
+
                 List<PlayerWebResponseData> playerData = JsonConvert.DeserializeObject<List<PlayerWebResponseData>>(responseContent);
                 return playerData;
 

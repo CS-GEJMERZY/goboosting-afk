@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Models;
+﻿using Core.Models;
 using CounterStrikeSharp.API.Core;
 
 namespace Core.Managers;
@@ -29,10 +23,10 @@ public class PlayerManager
 
     public static bool IsValid(CCSPlayerController? player)
     {
-        return player != null && 
-            player.IsValid && 
-            !player.IsBot && 
-            !player.IsHLTV && 
+        return player != null &&
+            player.IsValid &&
+            !player.IsBot &&
+            !player.IsHLTV &&
             player.AuthorizedSteamID != null &&
             player.Connected == PlayerConnectedState.PlayerConnected;
     }

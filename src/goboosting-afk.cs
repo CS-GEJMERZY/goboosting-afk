@@ -11,9 +11,6 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 
     public required PluginConfig Config { get; set; }
 
-
-    //internal Dictionary<CCSPlayerController, Models.PlayerData> PlayerCache = new();
-
     internal static ILogger? _logger;
 
     public void OnConfigParsed(PluginConfig _Config)
