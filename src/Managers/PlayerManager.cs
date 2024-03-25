@@ -7,16 +7,16 @@ public class PlayerManager
 {
     public static PlayerWebInputData GetPlayerWebInputData(CCSPlayerController player)
     {
-        PlayerWebInputData output = new();
-        output.PlayerName = player.PlayerName;
-        output.Steam64 = player!.AuthorizedSteamID!.SteamId64.ToString();
-
-
-
         var stats = player!.ActionTrackingServices!.MatchStats;
-        output.Kills = stats.Kills;
-        output.Deaths = stats.Deaths;
-        output.Assists = stats.Assists;
+
+        PlayerWebInputData output = new()
+        {
+            PlayerName = player.PlayerName,
+            Steam64 = player!.AuthorizedSteamID!.SteamId64.ToString(),
+            Kills = stats.Kills,
+            Deaths = stats.Deaths,
+            Assists = stats.Assists,
+        };
 
         return output;
     }

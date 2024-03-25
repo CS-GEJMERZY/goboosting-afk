@@ -5,18 +5,21 @@ using Newtonsoft.Json;
 namespace Core.Managers;
 
 
-public class SklepcsWebManager
+public class WebManager
 {
     private string ApiKey { get; set; } = "1234567890";
 
     private int ApiVersion { get; set; } = 200;
 
-    public SklepcsWebManager(string apiKey)
+    private string ServerIp { get; set; }
+
+    public WebManager(string apiKey, string serverIp)
     {
         ApiKey = apiKey;
+        ServerIp = serverIp;
     }
 
-    private async Task<List<PlayerWebResponseData>?> GetPlayersAsync(string ServerIp, List<PlayerWebInputData> PlayerInputData)
+    private async Task<List<PlayerWebResponseData>?> GetPlayersAsync( List<PlayerWebInputData> PlayerInputData)
     {
         var jsonData = new
         {
@@ -61,7 +64,7 @@ public class SklepcsWebManager
         }
     }
 
-    private async Task SendPlayerUpdate(string ServerIp, PlayerMenuFailType FailType, string Steam64)
+    private async Task SendPlayerUpdate(PlayerMenuFailType FailType, string Steam64)
     {
         string query = $"https://goboosting.pl/api.php?afk&api={ApiKey}&ip={ServerIp}&steam64={Steam64}&zly_wybor={(int)FailType}&ver={ApiVersion}";
 

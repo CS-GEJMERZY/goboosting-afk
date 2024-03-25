@@ -8,10 +8,11 @@ public class PluginConfig : BasePluginConfig
     [JsonPropertyName("KluczApi")]
     public string ApiKey { get; set; } = string.Empty;
 
+    //[JsonPropertyName("MenuDelayMin")]
+    public int MenuDelayMin { get; set; } = 300;
 
-    //public PluginConfig()
-    //{
-    //}
+    //[JsonPropertyName("MenuDelayMax")]
+    public int MenuDelayMax { get; set; } = 600;
 }
 
 

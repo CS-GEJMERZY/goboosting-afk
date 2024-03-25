@@ -11,16 +11,21 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 
     public required PluginConfig Config { get; set; }
 
-    internal static ILogger? _logger;
+    internal Managers.WebManager? WebManager { get; set; }
+
 
     public void OnConfigParsed(PluginConfig _Config)
     {
         Config = _Config;
+
     }
 
     public override void Load(bool hotReload)
     {
-        _logger = Logger;
+
+        string ServerIp = GetServerIp();
+        WebManager = new(Config.ApiKey, ServerIp);
+        Logger.LogInformation($"Uruchomiono plugin na serwerze {ServerIp}");
 
         if (hotReload)
         {
