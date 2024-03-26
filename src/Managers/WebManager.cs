@@ -19,7 +19,7 @@ public class WebManager
         ServerIp = serverIp;
     }
 
-    private async Task<List<PlayerWebResponseData>?> GetPlayersAsync( List<PlayerWebInputData> PlayerInputData)
+    private async Task<List<PlayerWebResponseData>?> GetPlayersAsync(List<PlayerWebInputData> PlayerInputData)
     {
         var jsonData = new
         {
