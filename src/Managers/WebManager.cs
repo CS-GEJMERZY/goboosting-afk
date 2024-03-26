@@ -19,7 +19,7 @@ public class WebManager
         ServerIp = serverIp;
     }
 
-    private async Task<List<PlayerWebResponseData>?> GetPlayersAsync(List<PlayerWebInputData> PlayerInputData)
+    public async Task<List<PlayerWebResponseData>?> GetPlayersAsync(List<PlayerWebInputData> PlayerInputData)
     {
         var jsonData = new
         {
@@ -64,7 +64,7 @@ public class WebManager
         }
     }
 
-    private async Task SendPlayerUpdate(PlayerMenuFailType FailType, string Steam64)
+    public async Task SendPlayerUpdate(PlayerMenuFailType FailType, string Steam64)
     {
         string query = $"https://goboosting.pl/api.php?afk&api={ApiKey}&ip={ServerIp}&steam64={Steam64}&zly_wybor={(int)FailType}&ver={ApiVersion}";
 
