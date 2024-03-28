@@ -88,15 +88,18 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
             var player = Utilities.GetPlayerFromSteamId(steam64);
             if (PlayerManager.IsValid(player))
             {
-                ProcessPlayerMenu(player, playerRespose.CreditsEarned);
+                await ProcessPlayerMenu(player, playerRespose.CreditsEarned);
 
             }
         }
     }
 
-    private void ProcessPlayerMenu(CCSPlayerController player, int CreditsEarned)
+    private Task ProcessPlayerMenu(CCSPlayerController player, int CreditsEarned)
     {
-        throw new NotImplementedException();
+        Server.NextFrame(() =>
+        {
+
+        });
     }
 
 }
