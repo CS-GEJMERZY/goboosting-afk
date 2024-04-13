@@ -1,4 +1,4 @@
-# goboosting-AFK
+# goboosting-afk
 
 ## Opis
 Plugin wyświetla boostującym graczom menu. Gracz musi wpisać komendę z odpowiednim numerem na czacie albo zabić w tym czasie przeciwnika, aby pomyślnie przejść test. W przeciwnym razie - w zależności od konfiguracji - gracz otrzymuje kicka, bana albo nic.
