@@ -1,0 +1,8 @@
+﻿{
+  "check.begin": "{lime}Rozpoczęto {red}test AFK{lime}!",
+  "check.checked_players": "{lime}Pomyślnie sprawdzono wszystkich graczy boostujących!",
+  "success.command": "{lime}Pomyślnie przeszedłeś {lightred}test AFK{lime}!",
+  "success.killed": "{lime}Pomyślnie przeszedłeś {lightred}test AFK{lime}!",
+  "fail.time": "{red}Minął czas na przejście {lightred}testu AFK{red}!",
+  "fail.command": "{red}Wprowadziłeś złą liczbę!"
+}

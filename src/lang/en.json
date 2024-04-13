@@ -1,0 +1,8 @@
+﻿{
+  "check.begin": "{lime}AFK test {red}started{lime}!",
+  "check.checked_players": "{lime}Successfully checked all boosting players!",
+  "success.command": "{lime}You have successfully passed the {lightred}AFK test{lime}!",
+  "success.killed": "{lime}You have successfully passed the {lightred}AFK test{lime}!",
+  "fail.time": "{red}Time expired to complete the {lightred}AFK test{red}!",
+  "fail.command": "{red}You entered the wrong number!"
+}

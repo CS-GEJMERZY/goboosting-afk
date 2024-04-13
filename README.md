@@ -1,17 +1,17 @@
-# Plugin
+# goboosting-AFK
 
-## Description
+## Opis
 
 
-## Dependencies
-- [CounterStrikeSharp](https://github.com/roflmuffin/CounterStrikeSharp/releases)
+## Wymagania
+- [CounterStrikeSharp](https://github.com/roflmuffin/CounterStrikeSharp/releases) v201
 - [Metamod:Source](https://www.sourcemm.net/downloads.php/?branch=master)
 
-## Instalation
-1. Download the [latest release](https://github.com/CS-GEJMERZY/Plugin/releases/latest)
-2. Unzip the package and upload files to **_csgo/addons/counterstrikesharp/plugins_**
+## Instalacja
+1. Pobierz [najnowsze wydanie](https://github.com/CS-GEJMERZY/goboosting-AFK/releases/latest)
+2. Wypakuj pliki i wgraj do **_csgo/addons/counterstrikesharp/plugins_**
 
-## Configuration
-Upon the first launch, the **_Plugin.json_**  file will be automatically created in **_csgo/addons/counterstrikesharp/configs/plugins/Plugin_**
+## Konfiguracja
+Przy pierwszym uruchomieniu, plik  **_goboosting-AFK.json_**  zostanie automatycznie utworzony w  **_csgo/addons/counterstrikesharp/configs/plugins/Plugin_**
 ```
 ```
