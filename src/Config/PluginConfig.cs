@@ -13,7 +13,7 @@ namespace Core.Config
         public FailReactionType FailReactionType { get; set; } = FailReactionType.NOTHING;
 
         [JsonPropertyName("BanKomenda")]
-        public string BanCommand { get; set; } = "css_ban #{PLAYER_USERID} {TIME_MINUTES} {REASON} ";
+        public string BanCommand { get; set; } = "css_ban #{USERID} {CZAS_W_MINUTACH} {POWOD}";
         [JsonPropertyName("BanCzasMinuty")]
         public int BanTimeMinutes { get; set; } = 5;
 
@@ -21,13 +21,13 @@ namespace Core.Config
         public string BanReason { get; set; } = "GO-BOOSTING AFK";
 
         [JsonPropertyName("KickKomenda")]
-        public string KickCommand { get; set; } = "css_kick #{PLAYER_USERID} {REASON}";
+        public string KickCommand { get; set; } = "css_kick #{USERID} {POWOD}";
 
         [JsonPropertyName("KickPowod")]
         public string KickReason { get; set; } = "GO-BOOSTING AFK";
 
         [JsonPropertyName("CzasMenuAfk")]
-        public int MenuMaxWaitTime { get; set; } = 15;
+        public int MenuMaxWaitTime { get; set; } = 30;
     }
 }
 

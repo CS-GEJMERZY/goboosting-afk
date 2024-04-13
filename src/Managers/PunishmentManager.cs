@@ -36,10 +36,10 @@ public class PunishmentManager(string banCommand, string kickCommand)
     private static string FormatCommand(string commandTemplate, CCSPlayerController player, string reason = "", int timeMinutes = 0)
     {
         return commandTemplate
-            .Replace("{PLAYER_NAME}", player!.PlayerName)
-            .Replace("{PLAYER_USERID}", player!.UserId!.Value.ToString())
-            .Replace("{PLAYER_IP}", player!.IpAddress!.Split(":")[0])
-            .Replace("{REASON}", reason)
-            .Replace("{TIME_MINUTES}", timeMinutes.ToString());
+            .Replace("{NICK}", player!.PlayerName)
+            .Replace("{USERID}", player!.UserId!.Value.ToString())
+            .Replace("{ADRES_IP}", player!.IpAddress!.Split(":")[0])
+            .Replace("{POWOD}", reason)
+            .Replace("{CZAS_W_MINUTACH}", timeMinutes.ToString());
     }
 }
