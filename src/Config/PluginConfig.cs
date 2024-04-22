@@ -18,13 +18,13 @@ namespace Core.Config
         public int BanTimeMinutes { get; set; } = 5;
 
         [JsonPropertyName("BanPowod")]
-        public string BanReason { get; set; } = "GO-BOOSTING AFK";
+        public string BanReason { get; set; } = "GOBOOSTING AFK";
 
         [JsonPropertyName("KickKomenda")]
         public string KickCommand { get; set; } = "css_kick #{USERID} {POWOD}";
 
         [JsonPropertyName("KickPowod")]
-        public string KickReason { get; set; } = "GO-BOOSTING AFK";
+        public string KickReason { get; set; } = "GOBOOSTING AFK";
 
         [JsonPropertyName("CzasMenuAfk")]
         public int MenuMaxWaitTime { get; set; } = 30;

@@ -19,25 +19,25 @@ Przy pierwszym uruchomieniu pluginu, plik **_goboosting-AFK.json_** zostanie aut
   "TypReakcji": 0,
   "BanKomenda": "css_ban #{USERID} {CZAS_W_MINUTACH} {POWOD}",
   "BanCzasMinuty": 5,
-  "BanPowod": "GO-BOOSTING AFK",
+  "BanPowod": "GOBOOSTING AFK",
   "KickKomenda": "css_kick #{PLAYER_USERID} {REASON}",
-  "KickPowod": "GO-BOOSTING AFK",
-  "CzasMenuAfk": 15,
+  "KickPowod": "GOBOOSTING AFK",
+  "CzasMenuAfk": 30,
   "ConfigVersion": 1
 }
 ```
 
 - Klucz API - znajdziesz na stronie https://goboosting.pl/?profil
 - Typ Reakcji:
-  - 0 = Zakończ boosting, bez dalszej akcji
+  - 0 = powiadom goboosting, bez dalszej akcji
   - 1 = wyrzuć gracza
   - 2 = zbanuj gracza=
 - Formatowanie komend ban i kick:
   - _NICK_ - nick gracza
   - _USERID_ - userid, np. 123
   - _ADRES_IP_ - Adres IP gracza, np 192.168.0.1
-  - _POWOD_ - powód kicka, bana; np. GO-BOOSTING AFK
-  - _CZAS_W_MINUTACH_ -  Czas banu w minutach
+  - _POWOD_ - powód kicka, bana; np. GOBOOSTING AFK
+  - _CZAS_W_MINUTACH_ -  Czas bana w minutach
 - CzasMenuAfk -  Czas wyświetlania menu testu AFK w sekundach
 
 ## Komendy
