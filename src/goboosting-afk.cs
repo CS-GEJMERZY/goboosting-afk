@@ -13,7 +13,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
     public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
-    public override string ModuleVersion => "0.0.1a";
+    public override string ModuleVersion => "0.0.2a";
 
     public required PluginConfig Config { get; set; }
 
