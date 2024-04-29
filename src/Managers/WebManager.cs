@@ -1,5 +1,4 @@
 using Core.Models;
-using CounterStrikeSharp.API;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -73,9 +72,6 @@ public class WebManager(string apiKey)
     public async Task SendPlayerUpdate(PlayerMenuFailType FailType, string Steam64, string ServerIp)
     {
         string query = $"https://goboosting.pl/api.php?afk&api={_apiKey}&ip={ServerIp}&steam64={Steam64}&zly_wybor={(int)FailType}&ver={_apiVersion}";
-#if DEBUG
-        await Server.NextFrameAsync(() => Server.PrintToConsole($"SendPlayerUpdate: {query}"));
-#endif
 
         using HttpClient httpClient = new();
         httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Valve/CSS Client");
