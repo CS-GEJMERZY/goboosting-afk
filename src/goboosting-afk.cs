@@ -13,7 +13,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
     public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
-    public override string ModuleVersion => "0.0.3";
+    public override string ModuleVersion => "0.0.4";
 
     public required PluginConfig Config { get; set; }
 
@@ -32,6 +32,12 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     public void OnConfigParsed(PluginConfig _Config)
     {
         Config = _Config;
+
+        if (Config.MenuMaxWaitTime < 20)
+        {
+            Config.MenuMaxWaitTime = 20;
+            Logger.LogInformation("MenuMaxWaitTime must be equal or greater than 20.");
+        }
 
         WebManager = new(apiKey: Config.ApiKey);
         PunishmentManager = new(banCommand: Config.BanCommand, kickCommand: Config.KickCommand);
