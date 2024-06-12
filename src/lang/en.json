@@ -1,5 +1,7 @@
 ﻿{
   "check.begin": "{lime}AFK test {red}started{lime}!",
+  "check.console.begin": "Begin goboosting afk check.",
+  "check.console.end": "End goboosting afk check.",
   "check.checked_players": "{lime}Successfully checked all boosting players!",
   "success.command": "{lime}You have successfully passed the {lightred}AFK test{lime}!",
   "success.killed": "{lime}You have successfully passed the {lightred}AFK test{lime}!",
