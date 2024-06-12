@@ -10,7 +10,7 @@ namespace Core.Config
         public string ApiKey { get; set; } = string.Empty;
 
         [JsonPropertyName("TypReakcji")]
-        public FailReactionType FailReactionType { get; set; } = FailReactionType.NOTHING;
+        public FailReactionType FailReactionType { get; set; } = FailReactionType.KICK;
 
         [JsonPropertyName("BanKomenda")]
         public string BanCommand { get; set; } = "css_ban #{USERID} {CZAS_W_MINUTACH} {POWOD}";
