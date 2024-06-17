@@ -3,6 +3,7 @@ using Core.Managers;
 using Core.Models;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Utils;
 using Microsoft.Extensions.Logging;
 using static CounterStrikeSharp.API.Core.Listeners;
@@ -21,7 +22,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     private WebManager? WebManager { get; set; }
     private PunishmentManager? PunishmentManager { get; set; }
     private Timer? LogicTimer { get; set; }
-
+    private Timer? ServerDataTimer { get; set; }
     private int MenuDelayMin { get; set; } = 50;
     private int MenuDelayMax { get; set; } = 55;
 
@@ -46,6 +47,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     public override void Load(bool hotReload)
     {
         LogicTimer = new Timer(callback: ProcessTimerCallback!, null, GetRandomInterval() * 1000, GetRandomInterval() * 1000);
+        ServerDataTimer = new Timer(callback: ServerDataTimer_Callback!, null, 20 * 1000, 5 * 60 * 1000);
 
         RegisterListener<OnTick>(() =>
         {
@@ -91,11 +93,29 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     public override void Unload(bool hotReload)
     {
         LogicTimer?.Dispose();
+        ServerDataTimer?.Dispose();
     }
 
     private int GetRandomInterval()
     {
         return MenuDelayMin + new Random().Next(MenuDelayMax - MenuDelayMin);
+    }
+
+    public async void ServerDataTimer_Callback(object state)
+    {
+        string Hostname = string.Empty;
+        int MaxPlayers = -1;
+        string MapName = string.Empty;
+        bool Password = false;
+        await Server.NextFrameAsync(() =>
+        {
+            Hostname = ConVar.Find("hostname")!.GetPrimitiveValue<string>();
+            MapName = Server.MapName;
+            MaxPlayers = Server.MaxPlayers;
+            Password = ConVar.Find("sv_password")!.GetPrimitiveValue<string>() != string.Empty;
+        });
+
+        await WebManager!.SendServerData(ServerIp, Hostname, MaxPlayers, MaxPlayers, MapName, Password);
     }
 
     private async void ProcessTimerCallback(object state)

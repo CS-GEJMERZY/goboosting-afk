@@ -85,4 +85,21 @@ public class WebManager(string apiKey)
             throw new Exception("Error occurred during API SendPlayerUpdate request", ex);
         }
     }
+
+    public async Task SendServerData(string ServerIp, string Hostname, int MaxSlots, int PlayerCount, string MapName, bool Password)
+    {
+        string query = $"https://goboosting.pl/api.php?serwer&api={_apiKey}&ip={ServerIp}&ver={_apiVersion}&hostname={Hostname}&maxslots={MaxSlots}&gracze={PlayerCount}&map={MapName}&has_password={Password}&moddesc={"Counter - Strike 2"}";
+
+        using HttpClient httpClient = new();
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Valve/CSS Client");
+
+        try
+        {
+            await httpClient.GetAsync(query);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error occurred during API SendInfoData request", ex);
+        }
+    }
 }
