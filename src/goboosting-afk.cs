@@ -14,7 +14,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
     public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
-    public override string ModuleVersion => "0.0.5";
+    public override string ModuleVersion => "0.0.6";
 
     public required PluginConfig Config { get; set; }
 
@@ -105,6 +105,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     {
         string Hostname = string.Empty;
         int MaxPlayers = -1;
+        int PlayerCount = 0;
         string MapName = string.Empty;
         bool Password = false;
         await Server.NextFrameAsync(() =>
@@ -113,9 +114,19 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
             MapName = Server.MapName;
             MaxPlayers = Server.MaxPlayers;
             Password = ConVar.Find("sv_password")!.GetPrimitiveValue<string>() != string.Empty;
+
+            foreach (var player in Utilities.GetPlayers())
+            {
+                if (PlayerManager.IsValid(player) &&
+                    !player.IsBot &&
+                    !player.IsHLTV)
+                {
+                    PlayerCount++;
+                }
+            }
         });
 
-        await WebManager!.SendServerData(ServerIp, Hostname, MaxPlayers, MaxPlayers, MapName, Password);
+        await WebManager!.SendServerData(ServerIp, Hostname, MaxPlayers, PlayerCount, MapName, Password);
     }
 
     private async void ProcessTimerCallback(object state)

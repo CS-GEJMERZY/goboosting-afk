@@ -88,18 +88,36 @@ public class WebManager(string apiKey)
 
     public async Task SendServerData(string ServerIp, string Hostname, int MaxSlots, int PlayerCount, string MapName, bool Password)
     {
-        string query = $"https://goboosting.pl/api.php?serwer&api={_apiKey}&ip={ServerIp}&ver={_apiVersion}&hostname={Hostname}&maxslots={MaxSlots}&gracze={PlayerCount}&map={MapName}&has_password={Password}&moddesc={"Counter - Strike 2"}";
+        var serverData = new Dictionary<string, object>
+        {
+            {"hostname", Hostname},
+            {"maxslots", MaxSlots},
+            {"gracze", PlayerCount},
+            {"map", MapName},
+            {"has_password", Password},
+            {"moddesc", "Counter - Strike 2"}
+        };
+
+        string jsonString = JsonConvert.SerializeObject(serverData);
+
+        string query = $"https://goboosting.pl/api.php?serwer&ip={ServerIp}&api={_apiKey}&ver={_apiVersion}&json={jsonString}";
 
         using HttpClient httpClient = new();
         httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Valve/CSS Client");
 
         try
         {
-            await httpClient.GetAsync(query);
+            HttpResponseMessage response = await httpClient.GetAsync(query);
+
+            if (!response.IsSuccessStatusCode)
+
+            {
+                throw new Exception($"API request failed with status code: {response.StatusCode}");
+            }
         }
         catch (Exception ex)
         {
-            throw new Exception("Error occurred during API SendInfoData request", ex);
+            throw new Exception("Error occurred during API GetPlayersAsync request", ex);
         }
     }
 }
