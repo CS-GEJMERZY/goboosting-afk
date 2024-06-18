@@ -114,8 +114,11 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 
             data.PlayerCount = Utilities.GetPlayers()
                         .Count(player => PlayerManager.IsValid(player) && !player.IsBot && !player.IsHLTV);
+
+            Logger.LogInformation("Executed frame code");
         });
 
+        Logger.LogInformation("Running send func");
         await WebManager!.SendServerData(ServerIp, data);
     }
 
