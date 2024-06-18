@@ -103,30 +103,20 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 
     public async void ServerDataTimer_Callback(object state)
     {
-        string Hostname = string.Empty;
-        int MaxPlayers = -1;
-        int PlayerCount = 0;
-        string MapName = string.Empty;
-        bool Password = false;
+        ServerDataPayload data = new();
+
         await Server.NextFrameAsync(() =>
         {
-            Hostname = ConVar.Find("hostname")!.GetPrimitiveValue<string>();
-            MapName = Server.MapName;
-            MaxPlayers = Server.MaxPlayers;
-            Password = ConVar.Find("sv_password")!.GetPrimitiveValue<string>() != string.Empty;
+            data.Hostname = ConVar.Find("hostname")!.StringValue;
+            data.MapName = Server.MapName;
+            data.MaxPlayers = Server.MaxPlayers;
+            data.Password = ConVar.Find("sv_password")!.StringValue != string.Empty;
 
-            foreach (var player in Utilities.GetPlayers())
-            {
-                if (PlayerManager.IsValid(player) &&
-                    !player.IsBot &&
-                    !player.IsHLTV)
-                {
-                    PlayerCount++;
-                }
-            }
+            data.PlayerCount = Utilities.GetPlayers()
+                        .Count(player => PlayerManager.IsValid(player) && !player.IsBot && !player.IsHLTV);
         });
 
-        await WebManager!.SendServerData(ServerIp, Hostname, MaxPlayers, PlayerCount, MapName, Password);
+        await WebManager!.SendServerData(ServerIp, data);
     }
 
     private async void ProcessTimerCallback(object state)

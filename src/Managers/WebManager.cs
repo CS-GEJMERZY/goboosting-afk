@@ -7,7 +7,7 @@ namespace Core.Managers;
 public class WebManager(string apiKey)
 {
     private readonly string _apiKey = apiKey;
-    private readonly int _apiVersion = 200;
+    private readonly int _apiVersion = 201;
 
     public async Task<List<PlayerWebResponseData>?> GetPlayersAsync(List<PlayerWebInputData> PlayerInputData, string ServerIp)
     {
@@ -86,15 +86,15 @@ public class WebManager(string apiKey)
         }
     }
 
-    public async Task SendServerData(string ServerIp, string Hostname, int MaxSlots, int PlayerCount, string MapName, bool Password)
+    public async Task SendServerData(string ServerIp, ServerDataPayload data)
     {
         var serverData = new Dictionary<string, object>
         {
-            {"hostname", Hostname},
-            {"maxslots", MaxSlots},
-            {"gracze", PlayerCount},
-            {"map", MapName},
-            {"has_password", Password},
+            {"hostname", data.Hostname},
+            {"maxslots", data.MaxPlayers},
+            {"gracze", data.PlayerCount},
+            {"map", data.MapName},
+            {"has_password", data.Password},
             {"moddesc", "Counter - Strike 2"}
         };
 
