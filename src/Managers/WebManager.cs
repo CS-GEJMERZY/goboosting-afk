@@ -95,7 +95,7 @@ public class WebManager(string apiKey)
             {"gracze", data.PlayerCount},
             {"map", data.MapName},
             {"has_password", data.Password},
-            {"moddesc", "Counter - Strike 2"}
+            {"moddesc", "Counter-Strike 2"}
         };
 
         string jsonString = JsonConvert.SerializeObject(serverData);
