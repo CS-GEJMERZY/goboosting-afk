@@ -14,7 +14,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
     public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
-    public override string ModuleVersion => "0.0.6";
+    public override string ModuleVersion => "0.0.7";
 
     public required PluginConfig Config { get; set; }
 
@@ -110,15 +110,12 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
             data.Hostname = ConVar.Find("hostname")!.StringValue;
             data.MapName = Server.MapName;
             data.MaxPlayers = Server.MaxPlayers;
-            data.Password = ConVar.Find("sv_password")!.StringValue != string.Empty;
+            data.Password = ConVar.Find("sv_password")!.StringValue != "0";
 
             data.PlayerCount = Utilities.GetPlayers()
                         .Count(player => PlayerManager.IsValid(player) && !player.IsBot && !player.IsHLTV);
-
-            Logger.LogInformation("Executed frame code");
         });
 
-        Logger.LogInformation("Running send func");
         await WebManager!.SendServerData(ServerIp, data);
     }
 

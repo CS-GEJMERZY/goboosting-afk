@@ -7,7 +7,7 @@ namespace Core.Managers;
 public class WebManager(string apiKey)
 {
     private readonly string _apiKey = apiKey;
-    private readonly int _apiVersion = 201;
+    private readonly int _apiVersion = 202;
 
     public async Task<List<PlayerWebResponseData>?> GetPlayersAsync(List<PlayerWebInputData> PlayerInputData, string ServerIp)
     {
@@ -95,7 +95,7 @@ public class WebManager(string apiKey)
             {"gracze", data.PlayerCount},
             {"map", data.MapName},
             {"has_password", data.Password},
-            {"moddesc", "Counter-Strike 2"}
+            {"moddesc", data.ModDesc}
         };
 
         string jsonString = JsonConvert.SerializeObject(serverData);

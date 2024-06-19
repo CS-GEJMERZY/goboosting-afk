@@ -7,5 +7,6 @@ public class ServerDataPayload
     public int PlayerCount { get; set; } = -1;
     public string MapName { get; set; } = "invalid";
     public bool Password { get; set; } = false;
+    public string ModDesc { get; set; } = "Counter-Strike 2";
 }
 
