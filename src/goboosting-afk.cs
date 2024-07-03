@@ -3,6 +3,7 @@ using Core.Managers;
 using Core.Models;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Modules.Cvars;
 using CounterStrikeSharp.API.Modules.Utils;
 using Microsoft.Extensions.Logging;
 using static CounterStrikeSharp.API.Core.Listeners;
@@ -13,7 +14,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
 {
     public override string ModuleName => "goboosting-afk";
     public override string ModuleAuthor => "Hacker";
-    public override string ModuleVersion => "0.0.2a";
+    public override string ModuleVersion => "0.0.8a";
 
     public required PluginConfig Config { get; set; }
 
@@ -21,7 +22,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     private WebManager? WebManager { get; set; }
     private PunishmentManager? PunishmentManager { get; set; }
     private Timer? LogicTimer { get; set; }
-
+    private Timer? ServerDataTimer { get; set; }
     private int MenuDelayMin { get; set; } = 50;
     private int MenuDelayMax { get; set; } = 55;
 
@@ -33,6 +34,12 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     {
         Config = _Config;
 
+        if (Config.MenuMaxWaitTime < 20)
+        {
+            Config.MenuMaxWaitTime = 20;
+            Logger.LogInformation("MenuMaxWaitTime must be equal or greater than 20.");
+        }
+
         WebManager = new(apiKey: Config.ApiKey);
         PunishmentManager = new(banCommand: Config.BanCommand, kickCommand: Config.KickCommand);
     }
@@ -40,6 +47,7 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     public override void Load(bool hotReload)
     {
         LogicTimer = new Timer(callback: ProcessTimerCallback!, null, GetRandomInterval() * 1000, GetRandomInterval() * 1000);
+        ServerDataTimer = new Timer(callback: ServerDataTimer_Callback!, null, 20 * 1000, 5 * 60 * 1000);
 
         RegisterListener<OnTick>(() =>
         {
@@ -85,11 +93,30 @@ public partial class Plugin : BasePlugin, IPluginConfig<PluginConfig>
     public override void Unload(bool hotReload)
     {
         LogicTimer?.Dispose();
+        ServerDataTimer?.Dispose();
     }
 
     private int GetRandomInterval()
     {
         return MenuDelayMin + new Random().Next(MenuDelayMax - MenuDelayMin);
+    }
+
+    public async void ServerDataTimer_Callback(object state)
+    {
+        ServerDataPayload data = new();
+
+        await Server.NextFrameAsync(() =>
+        {
+            data.Hostname = ConVar.Find("hostname")!.StringValue;
+            data.MapName = Server.MapName;
+            data.MaxPlayers = Server.MaxPlayers;
+            data.Password = ConVar.Find("sv_password")!.StringValue.Length > 1;
+
+            data.PlayerCount = Utilities.GetPlayers()
+                        .Count(player => PlayerManager.IsValid(player) && !player.IsBot && !player.IsHLTV);
+        });
+
+        await WebManager!.SendServerData(ServerIp, data);
     }
 
     private async void ProcessTimerCallback(object state)

@@ -1,5 +1,7 @@
 ﻿{
   "check.begin": "{lime}Rozpoczęto {red}test AFK{lime}!",
+  "check.console.begin": "Rozpoczęto test AFK.",
+  "check.console.end": "Zakończono test AFK.",
   "check.checked_players": "{lime}Pomyślnie sprawdzono wszystkich graczy boostujących!",
   "success.command": "{lime}Pomyślnie przeszedłeś {lightred}test AFK{lime}!",
   "success.killed": "{lime}Pomyślnie przeszedłeś {lightred}test AFK{lime}!",

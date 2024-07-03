@@ -10,17 +10,17 @@ public partial class Plugin
     [GameEventHandler]
     public HookResult EventPlayerConnectFull(EventPlayerConnectFull @event, GameEventInfo info)
     {
-        CCSPlayerController player = @event.Userid;
+        CCSPlayerController? player = @event.Userid;
 
         if (!PlayerManager.IsValid(player))
         {
             return HookResult.Continue;
         }
 
-        if (!_playerCache.TryGetValue(player, out Models.PlayerData? playerData))
+        if (!_playerCache.TryGetValue(player!, out Models.PlayerData? playerData))
         {
             playerData = new Models.PlayerData();
-            _playerCache.Add(player, playerData);
+            _playerCache.Add(player!, playerData);
         }
 
         playerData.MenuActive = false;
@@ -38,7 +38,7 @@ public partial class Plugin
             return HookResult.Continue;
         }
 
-        _playerCache.Remove(player);
+        _playerCache.Remove(player!);
 
         return HookResult.Continue;
     }
@@ -137,10 +137,10 @@ public partial class Plugin
     [GameEventHandler]
     public HookResult OnPlayerDeath(EventPlayerDeath @event, GameEventInfo info)
     {
-        CCSPlayerController attacker = @event.Attacker;
+        CCSPlayerController? attacker = @event.Attacker;
 
         if (!PlayerManager.IsValid(attacker) ||
-            attacker.IsBot ||
+            attacker!.IsBot ||
             !_playerCache.TryGetValue(attacker, out Models.PlayerData? playerData))
         {
             return HookResult.Continue;
